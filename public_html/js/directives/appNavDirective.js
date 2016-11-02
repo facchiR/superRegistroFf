@@ -7,6 +7,7 @@ app.directive('appNav', function() {
 
 app.controller('ProfileController', ['$scope', '$uibModalInstance', 'params',
     function($scope, $uibModalInstance, params) {
+  $scope.userRoles = ["Admin", "Manager", "Guest"];
   var init = function(){
     $.each(params, function(i,v){
         $scope[i] = v;

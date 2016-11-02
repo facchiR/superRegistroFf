@@ -5,24 +5,24 @@
    <h4 id="myModalLabel" class="modal-title">{{ title }}</h4>
 </div>
 <div class="modal-body">
-    <form class="well well-sm panel-body">
-         <div class="form-group col-md-6 col-sm-12">
-              <label for="exampleName1">Nome</label>
-              <input type="text" class="form-control" id="exampleName1" name="name" ng-model="user.name" placeholder="Inserire un nome">
+    <form novalidate class="well well-sm panel-body" name="edit" ng-submit="edit(edit.$valid)">
+        <div class="form-group col-md-6 col-sm-12" ng-class="{ 'has-error' : edit.name.$invalid && !edit.name.$pristine }">
+              <label>Nome</label>
+              <input type="text" class="form-control" name="name" ng-model="user.name" ng-minlength="2" ng-maxlength="10" placeholder="Inserire un nome">
         </div>
-         <div ng-if="isAdmin" class="form-group col-md-6 col-sm-12">
-              <label for="exampleSurname1">Ruolo</label>
-              <input type="text" class="form-control" id="exampleSurname1" name="role" ng-model="user.role" placeholder="Inserire un ruolo">
+        <div class="form-group col-md-6 col-sm-12" ng-class="{ 'has-error' : edit.surname.$invalid && !edit.surname.$pristine }">
+              <label>Cognome</label>
+              <input type="text" class="form-control" name="born" ng-model="user.surname" ng-minlength="2" ng-maxlength="10" placeholder="Inserire un cognome">
         </div>
-         <div class="form-group col-md-6 col-sm-12">
-              <label for="exampleSurname1">Email</label>
-              <input class="form-control">
+        <div ng-if="isAdmin" class="form-group col-md-6 col-sm-12">
+              <label>Ruolo</label>
+              <select class="form-control" ng-model="user.role" ng-options="item for item in userRoles" name="role"></select>
+        </div>
+        <div class="form-group col-md-6 col-sm-12" ng-class="{ 'has-error' : edit.email.$invalid && !edit.email.$pristine }">
+              <label>Email</label>
+              <input size="10" name="email" required type="email" class="form-control" ng-model="user.mail" placeholder="Email">
         </div>
   
-        <div class="form-group col-md-6 col-sm-12">
-              <label for="exampleId1">Nato il</label>
-              <input type="date" class="form-control" data-date-format="dd/mm/yy" data-language="it" name="born" ng-model="user.borndate" placeholder="gg/mm/aaaa">
-        </div>
     </form>
 </div>
 <div class="modal-footer">
